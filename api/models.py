@@ -5,11 +5,13 @@ class asha(models.Model):
 	asha_id = models.CharField(max_length=10) 
 	name = models.CharField(max_length=50)
 
+	class Meta:
+		abstract = True
 	def __str__(self):
 		return self.name
 
 class family_profile(models.Model):
-	asha = models.ForeignKey(asha, on_delete=models.CASCADE)
+	#asha = models.ForeignKey(asha, on_delete=models.CASCADE)
 	anm = models.CharField(max_length=50)
 	health_facility = models.CharField(max_length=100)
 	area_code = models.IntegerField()
@@ -39,6 +41,8 @@ class family_profile(models.Model):
 	class Meta:
 		abstract = True
 
+	def __str__(self):
+        	return self.anm
 
 class basic_amenities(models.Model):
 	TYPE = (
@@ -95,6 +99,9 @@ class basic_amenities(models.Model):
 	class Meta:
 		abstract = True
 
+	def __str__(self):
+		return self.house_type
+
 class other_service_provision(models.Model):
 	anganwadi_services = models.BooleanField()
 	CATs = models.BooleanField()
@@ -103,6 +110,10 @@ class other_service_provision(models.Model):
 
 	class Meta:
 		abstract = True
+
+	def __str__(self):
+		return self.anganwadi_services
+
 '''
 class family(models.Model):
 	profile = models.EmbeddedModelField(
@@ -129,6 +140,7 @@ class family(models.Model):
 class family(models.Model):
 	family_id = models.CharField(primary_key=True, max_length=10)
 
+	family_asha = models.EmbeddedModelField(model_container = asha)
 	profile = models.EmbeddedModelField(model_container = family_profile)
 	amenities = models.EmbeddedModelField(model_container = basic_amenities)
 	other = models.EmbeddedModelField(model_container=other_service_provision)

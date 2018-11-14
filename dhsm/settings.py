@@ -25,7 +25,7 @@ SECRET_KEY = 'a1hoerwicy5e-17_*asoob-rvf9-_jpgk)iu1ugqm7x!hp^8h$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['192.168.2.214']
 
 
 # Application definition
@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'dhsm.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'djongo',
-        'NAME': 'forms',
+        'NAME': 'forms3',
     }
 }
 
