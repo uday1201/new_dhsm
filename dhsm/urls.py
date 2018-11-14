@@ -20,7 +20,9 @@ from rest_framework import routers
 from api import views
 
 router = routers.SimpleRouter()
-router.register(r'family', views.familyViewSet)
+router.register(r'family_profile', views.family_profileViewSet)
+router.register(r'basic_amenities', views.basic_amenitiesViewSet)
+router.register(r'other_service_provision', views.other_service_provisionViewSet)
 
 urlpatterns = [
 	url(r'^', include(router.urls)),
