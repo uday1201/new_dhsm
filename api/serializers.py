@@ -16,3 +16,25 @@ class other_service_provisionSerializer(serializers.ModelSerializer):
     class Meta:
         model = other_service_provision
         fields = '__all__'
+
+class family_membersSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = family_members
+        fields = '__all__'
+
+class memberSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = member
+        fields = '__all__'
+    #family_member_id = serializers.ReadOnlyField()
+
+class rntcpSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = rntcp
+        fields = '__all__'
+
+class ashaSerializer(serializers.ModelSerializer):
+    class Meta:
+    	model = asha
+    	fields = ("name", "dispensary", "anm", "asha_id", "email")
+    asha_id = serializers.ReadOnlyField()

@@ -23,6 +23,11 @@ router = routers.SimpleRouter()
 router.register(r'family_profile', views.family_profileViewSet)
 router.register(r'basic_amenities', views.basic_amenitiesViewSet)
 router.register(r'other_service_provision', views.other_service_provisionViewSet)
+router.register(r'family_members', views.family_membersViewSet)
+router.register(r'member', views.memberViewSet)
+router.register(r'rntcp', views.rntcpViewSet)
+router.register(r'asha', views.ashaViewSet)
+
 
 urlpatterns = [
 	url(r'^', include(router.urls)),

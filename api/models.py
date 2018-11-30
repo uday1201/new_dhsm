@@ -1,12 +1,24 @@
 from djongo import models
 from django.utils import timezone
+
 # Create your models here.
-'''class asha(models.Model):
-	asha_id = models.CharField(max_length=10) 
-	name = models.CharField(max_length=50)
+
+
+class asha(models.Model):
+	name = models.CharField(max_length=25)
+	#asha_id = models.CharField(max_length=10, blank=True) 
+	dispensary = models.CharField(max_length=10)
+	anm = models.CharField(max_length=10)
+	area_code = models.CharField(max_length=10)
+	email = models.CharField(primary_key=True, max_length=50)
+
+	@property
+	def asha_id(self):
+		return str(self.dispensary+self.anm+self.area_code)
+	
 
 	def __str__(self):
-		return self.name'''
+		return self.name
 
 class family_profile(models.Model):
 	family_id = models.CharField(primary_key=True, max_length=10)
@@ -132,4 +144,79 @@ class family(models.Model):
     def __str__(self):
     	return self.headline
 '''
+class family_members(models.Model):
+	family_id = models.CharField(primary_key=True, max_length=10)
+	date_of_updation = models.DateField()
+	#members = models.EmbeddedModelField(model_container=member)
+	number_of_members = models.IntegerField()
+	number_of_males = models.IntegerField()
+	number_of_females = models.IntegerField()
 
+	def __str__(self):
+		return self.family_id
+
+
+class member(models.Model):
+	family_member_id = models.CharField(primary_key=True, max_length=10)
+	family_id = models.CharField(max_length=10)
+	name = models.CharField(max_length=50)
+	SEX = (
+		('1', 'Male'),
+		('2', 'Female'),
+		('3', 'other'),
+		)
+	sex = models.CharField(max_length=1, choices=SEX)
+	date_of_birth = models.DateField()
+	age = models.IntegerField()
+	aadhar_number = models.CharField(max_length=16, blank=True)
+	OCCUPATION = (
+		('1', 'Private'),
+		('2', 'Govt'),
+		('3', 'Self Employed'),
+		('4', 'Daily Wager'),
+		('5', 'Unemployed'),
+		('6', 'Student'),
+		('7', 'Housewife'),
+		)
+	occupation = models.CharField(max_length=1, choices=OCCUPATION)
+	MARITAL = (
+		('1', 'Married'),
+		('2', 'Unmarried'),
+		('3', 'Divorced'),
+		('4', 'Widowed'),
+		)
+	marital_status = models.CharField(max_length=1, choices=MARITAL)
+
+	'''@property
+	def family_member_id(self):
+		return str(self.family_id+'_'+self.name)'''
+
+
+
+	def __str__(self):
+		return self.family_member_id
+
+
+class rntcp(models.Model):
+	family_member_id = models.CharField(primary_key=True, max_length=10)
+
+	CHOICES = (
+		('1', 'Yes'),
+		('2', 'No'),
+		)
+	cough = models.CharField(max_length=1, choices=CHOICES)
+	fever = models.CharField(max_length=1, choices=CHOICES)
+	loss_of_appetite = models.CharField(max_length=1, choices=CHOICES)
+	blood_in_sputum = models.CharField(max_length=1, choices=CHOICES)
+	chest_pain = models.CharField(max_length=1, choices=CHOICES)
+	past_history = models.CharField(max_length=1, choices=CHOICES)
+	TREATMENT = (
+		('1', 'Completed'),
+		('2', 'Left in between'),
+		('3', 'Not yet started'),
+		('4', 'Going on'),
+		)
+	treatment_status = models.CharField(max_length=1, choices=TREATMENT, blank=True)
+
+	def __str__(self):
+		return self.family_member_id
