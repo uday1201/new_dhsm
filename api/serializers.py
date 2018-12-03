@@ -36,5 +36,4 @@ class rntcpSerializer(serializers.ModelSerializer):
 class ashaSerializer(serializers.ModelSerializer):
     class Meta:
     	model = asha
-    	fields = ("name", "dispensary", "anm", "asha_id", "email")
-    asha_id = serializers.ReadOnlyField()
+    	fields = "__all__"

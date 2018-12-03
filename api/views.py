@@ -51,5 +51,5 @@ class rntcpViewSet(viewsets.ModelViewSet):
 
 
 class ashaViewSet(viewsets.ModelViewSet):
-	queryset = asha.objects.all()
+	queryset = asha.objects.all().order_by('-email')
 	serializer_class = ashaSerializer

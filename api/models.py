@@ -5,17 +5,12 @@ from django.utils import timezone
 
 
 class asha(models.Model):
+	email = models.CharField(max_length=20)
 	name = models.CharField(max_length=25)
-	#asha_id = models.CharField(max_length=10, blank=True) 
-	dispensary = models.CharField(max_length=10)
-	anm = models.CharField(max_length=10)
+	asha_id = models.CharField(max_length=10, blank=True) 
+	#dispensary = models.CharField(max_length=10)
+	#anm = models.CharField(max_length=10)
 	area_code = models.CharField(max_length=10)
-	email = models.CharField(primary_key=True, max_length=50)
-
-	@property
-	def asha_id(self):
-		return str(self.dispensary+self.anm+self.area_code)
-	
 
 	def __str__(self):
 		return self.name
